@@ -1,6 +1,5 @@
 <template>
   <div class="page-frame">
-      <router-link to="/deals">Back to your deals</router-link>
         <section>
             <div class='deal-title-div'>
                 <div>
@@ -9,10 +8,10 @@
                 <div class="title-inner-div">
                     <h1>{{companyName}}</h1>
                     <h2>{{dealName}}</h2>
-                <button class='update-deal' @click="editDeal">
-                    <icon class="icon is-small is-left" name="pencil-square-o"></icon>
-                    Update deal
-                </button>
+                    <button class='update-deal' @click="editDeal">
+                        <icon class="icon is-small is-left" name="pencil-square-o"></icon>
+                        Update deal
+                    </button>
                 </div>
             </div>
             <div class="description-div">
@@ -63,9 +62,30 @@ export default {
             this.dealName = deal.dealName;
             this.category = deal.category;
             this.description = deal.description;
-            this.investors = deal.investors;
+            this.investors = deal.investors.sort((investor1, investor2) => {
+                return investor1.split(' ')[1] > investor2.split(' ')[1];
+            });
         })
     },
+    watch: {
+    isEditDealActive(){
+      if(this.isEditDealActive === false){
+        console.log('it chnaged to false');
+      getDealById(this.dealId)
+      .then(deal => {
+            console.log('the deal data is', deal);
+            this.companyName = deal.companyName;
+            this.companyLogoUrl = deal.companyLogoUrl;
+            this.dealName = deal.dealName;
+            this.category = deal.category;
+            this.description = deal.description;
+            this.investors = deal.investors.sort((investor1, investor2) => {
+                return investor1.split(' ')[1] > investor2.split(' ')[1];
+            });
+        })
+      }
+    }
+  },
     methods: {
         editDeal(){
             this.isEditDealActive = true;
@@ -82,7 +102,7 @@ export default {
 <style scoped>
 .page-frame{
   width: 50%;
-  margin: 0 auto 60px;
+  margin: 90px auto 60px;
   min-width: 500px;
   background-color: white;
 }
@@ -98,7 +118,9 @@ img {
 
 .title-inner-div{
     text-align: left;
-    margin-left: 15px;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
 }
 
 h1{
@@ -128,6 +150,8 @@ h2{
   font-size: 1em;
   height: 2em;
   border-radius: 4px;
+  width: 150px;
+  margin-top: 10px;
 }
 
 .update-deal:hover {

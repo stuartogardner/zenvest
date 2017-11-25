@@ -1,7 +1,7 @@
 <template>
   <div class="page-frame">
     <h1 class="welcome">Welcome to Zenvest</h1>
-    <p class='intro-text'>Below, you can view all of your deals. Click on a deal to see more information, or click the 'Create a new deal' button to add a new deal.</p>
+    <p class='intro-text'>Below, you can view all of your deals. Click on a deal to see more information, or click the <span style="font-style: italic">'Create a new deal'</span> button to add a new deal.</p>
     <button class='new-deal' @click="createNewDealModal">
       <icon class="icon is-small is-left" name="plus-square"></icon>
       Create a new deal
@@ -12,8 +12,8 @@
         <th>Deal</th>
       </tr>
       <tr v-for="deal in deals" @click="showDetails(deal)"> 
-        <td class='cell1 right-border'><img :src="deal.companyLogoUrl"> &nbsp{{deal.companyName}}</td>
-        <td class='cell2'>{{deal.dealName}}</td>
+        <td class='cell1 right-border capitalise'><img :src="deal.companyLogoUrl"> &nbsp{{deal.companyName}}</td>
+        <td class='cell2 capitalise'>{{deal.dealName}}</td>
       </tr>
     </table>
 
@@ -82,7 +82,7 @@ export default {
 <style scoped>
 .page-frame{
   width: 50%;
-  margin: 0 auto 60px;
+  margin: 90px auto 60px;
   min-width: 500px;;
 }
 
@@ -170,5 +170,8 @@ tr:not(:first-child):hover {
   margin-left: 2px;
   margin-right: 2px;
   vertical-align: bottom;
+}
+.capitalise{
+  text-transform: capitalize;
 }
 </style>

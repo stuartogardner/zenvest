@@ -43,8 +43,10 @@
 
                 <button v-if="dealId === undefined" class="button is-success" type="submit"  name="button" style="font-weight: bold">Add Deal</button>
                 <button v-else class="button is-success" type="submit"  name="button" style="font-weight: bold">Update Deal</button>
+                <br>
+                <br>
+                <p v-if="successMessage!==null" class="success-message">{{successMessage}}</p>
 
-                <p v-if="successMessage!==null">{{successMessage}}</p>
               </form>
               <br>
             </div>
@@ -131,6 +133,16 @@ export default {
 </script>
 
 <style scoped>
+
+.success-message{
+    color: lightseagreen;
+}
+
+.modal-card-body{
+    border-radius: 8px;
+    padding-bottom: 40px;
+    height: 1500px;
+}
 
 .label{
     text-align: left;
