@@ -47,12 +47,24 @@ export default {
     getDeals()
     .then(response => this.deals = response);
   },
+  watch: {
+    isNewDealModalActive(){
+      if(this.isNewDealModalActive === false){
+        console.log('it chnaged to false');
+      getDeals()
+      .then(response => this.deals = response);
+      }
+    }
+  },
   methods: {
     createNewDealModal(){
       this.isNewDealModalActive = true;
     },
     close(){
       this.isNewDealModalActive =false;
+      console.log('it closed')
+      getDeals()
+      .then(response => this.deals = response);
     },
     showDetails(deal){ 
       console.log('ive been clicked');

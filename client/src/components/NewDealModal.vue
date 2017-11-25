@@ -26,18 +26,18 @@
                 <label class="label">Deal Category</label>
                  <b-field type="no-icon" >
                     <b-select required v-model="categoryName" placeholder="Category" >
-                        <option disabled class="option" value="">Please select one</option>
-                        <option class="option" value="Pre-Seed / Seed">Pre-Seed / Seed</option>
-                        <option class="option" value="Series A">Series A</option>
-                        <option class="option" value="Series B">Series B</option>
-                        <option class="option" value="Series C">Series C</option>
+                        <option disabled value=""><span class="option">Please select one</span></option>
+                        <option value="Pre-Seed / Seed"><span class="option">Pre-Seed / Seed</span></option>
+                        <option value="Series A"><span class="option">Series A</span></option>
+                        <option value="Series B"><span class="option">Series B</span></option>
+                        <option value="Series C"><span class="option">Series C</span></option>
                     </b-select>
                  </b-field>
               </div>
 
               <div class="field">
                 <label class="label" >Deal Description
-                    <b-input maxlength="600" type="textarea" required rows="6" cols="30" v-model="description" placeholder="Introduce the key points of the deal"></b-input>
+                    <b-input maxlength="600" type="textarea" required rows="3" cols="30" v-model="description" placeholder="Introduce the key points of the deal"></b-input>
                 </label>
               </div>
 
@@ -137,7 +137,7 @@ export default {
 }
 
 .option{
-    font-size: 1em;
+    font-size: 0.5em;
 }
 </style>
 
