@@ -6,6 +6,8 @@ import DealDetails from '@/components/DealDetails'
 Vue.use(Router)
 
 const router = new Router({
+  // history mode removes the /#/ after local host. E.g. from localhost:8080/#/... to localhost:8080/...
+  mode: "history",
   routes: [
     {
       path: '/',
@@ -17,6 +19,7 @@ const router = new Router({
       component: DealDetails,
 
     },
+    // This redirects any url that isn't recognised to the '/' page
     {
       path: '*',
       redirect: '/',

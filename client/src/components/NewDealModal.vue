@@ -3,6 +3,7 @@
         <section class="modal-card-body">
 
           <div class="field">
+              <!-- Submitting the form calls either updateDeal or addDeal, depending on if it's a new deal or an existing deal -->
             <form @submit.prevent="addDeal(); updateDeal()">
               <div class="field">
                 <label class="label">Company name <span class="required">*</span>
@@ -86,6 +87,7 @@ export default {
             // participatingInvestors: '',
         };
     },
+    // this pre-populates the input fields with the data from the db if it is an existing deal, otherwise it is empty for a new deal
     created(){
         this.dealId = this.$route.params[0];
 

@@ -40,6 +40,7 @@ export default {
       path:'',
     };
   },
+  // Getting the path allows us to show/hide navbar options depending on what page the user is on
   created(){
     this.path = this.$route.path;
   },

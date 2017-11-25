@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -7,7 +8,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-mongoose.connect('mongodb://localhost/zenvest', { useMongoClient: true });
+mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
 
 const deals = require('./routes/deals');
 const investors = require('./routes/investors');
@@ -20,9 +21,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cors({
-  origin: "http://localhost:8080"
-}));
+// adding CORS
+if (app.get("env") === "development") {
+  app.use(
+    cors({
+      origin: "http://localhost:8080"
+    })
+  );
+}
 
 app.use('/api', deals);
 app.use('/api', investors);

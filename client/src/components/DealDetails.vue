@@ -26,6 +26,7 @@
             </div>
         </section>
 
+<!-- this emits a 'close' when the modal is closed, which is used to re-fetch the deal data from the db, so that the recently added / updated deal is visible instantly, without a refresh of the page needed -->
     <b-modal :active.sync="isEditDealActive" has-modal-card>
           <new-deal-modal @close="close"></new-deal-modal>
     </b-modal>
@@ -65,6 +66,7 @@ export default {
             });
         })
     },
+    // the watch is setup to listen for the close of the modal, so it can show the updated deal instantly
     watch: {
     isEditDealActive(){
       if(this.isEditDealActive === false){
