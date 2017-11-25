@@ -11,6 +11,7 @@ const history = require('express-history-api-fallback');
 
 mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
 
+
 const deals = require('./routes/deals');
 const investors = require('./routes/investors');
 
