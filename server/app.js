@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const history = require('express-history-api-fallback');
 
 mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
 
@@ -32,6 +33,11 @@ if (app.get("env") === "development") {
 
 app.use('/api', deals);
 app.use('/api', investors);
+
+// for serving files when we deploy, and history fallback allows people to access any url directly, not just from router links from index
+const clientRoot = path.join(__dirname, '../client/dist');
+app.use('/', express.static(clientRoot))
+app.use(history('index.html', { root: clientRoot }))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,21 @@
+{
+  "name": "Zenvest",
+  "version": "1.0.0",
+  "description": "This is the readme file for the eFounders Zenvest project.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd server && npm install",
+    "start": "cd server && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stuartogardner/zenvest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stuartogardner/zenvest/issues"
+  },
+  "homepage": "https://github.com/stuartogardner/zenvest#readme"
+}
