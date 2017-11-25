@@ -12,7 +12,7 @@
 
               <div class="field">
                 <label class="label">Company Logo
-                    <input class="input" type="text" required v-model="companyLogoUrl" placeholder="Add a link to the company logo">
+                    <input class="input" type="text" required v-model="companyLogoUrl" placeholder="Add a link to the company logo, e.g. https://company.com/logo.png">
                 </label>
               </div>
 
@@ -24,12 +24,13 @@
 
               <div class="field">
                 <label class="label">Deal Category</label>
-                 <b-field type="no-icon">
-                    <b-select placeholder="Category" required v-model="categoryName">
-                        <option value="Pre-Seed / Seed">Pre-Seed / Seed</option>
-                        <option value="Series A">Series A</option>
-                        <option value="Series B">Series B</option>
-                        <option value="Series C">Series C</option>
+                 <b-field type="no-icon" >
+                    <b-select required v-model="categoryName" placeholder="Category" >
+                        <option disabled class="option" value="">Please select one</option>
+                        <option class="option" value="Pre-Seed / Seed">Pre-Seed / Seed</option>
+                        <option class="option" value="Series A">Series A</option>
+                        <option class="option" value="Series B">Series B</option>
+                        <option class="option" value="Series C">Series C</option>
                     </b-select>
                  </b-field>
               </div>
@@ -129,6 +130,40 @@ export default {
 }
 </script>
 
+<style scoped>
+
+.label{
+    text-align: left;
+}
+
+.option{
+    font-size: 1em;
+}
+</style>
+
 <style>
 
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    lightgrey;
+    font-size: 0.8em;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    lightgrey;
+   opacity:  1;
+   font-size: 0.8em;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    lightgrey;
+   opacity:  1;
+   font-size: 0.8em;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    lightgrey;
+   font-size: 0.8em;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    lightgrey;
+   font-size: 0.8em;
+}
 </style>
+

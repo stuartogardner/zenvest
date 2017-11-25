@@ -1,20 +1,21 @@
 <template>
-  <div class="hello">
-    <h1>Welcome to Zenvest</h1>
-    <button @click="createNewDealModal">Create a new deal</button>
-    <table>
+  <div class="page-frame">
+    <h1 class="welcome">Welcome to Zenvest</h1>
+    <p class='intro-text'>Below, you can view all of your deals. Click on a deal to see more information, or click the 'Create a new deal' button to add a new deal.</p>
+    <button class='new-deal' @click="createNewDealModal">
+      <icon class="icon is-small is-left" name="plus-square"></icon>
+      Create a new deal
+    </button>
+    <table class='main-table'>
       <tr>
         <th class='right-border'>Company</th>
         <th>Deal</th>
       </tr>
       <tr v-for="deal in deals" @click="showDetails(deal)"> 
-        <td class='right-border'><img :src="deal.companyLogoUrl"> {{deal.companyName}}</td>
-        <td>{{deal.dealName}}</td>
+        <td class='cell1 right-border'><img :src="deal.companyLogoUrl"> &nbsp{{deal.companyName}}</td>
+        <td class='cell2'>{{deal.dealName}}</td>
       </tr>
     </table>
-
-    <!-- the text form of the deals, to be removed -->
-    <p>what is this {{deals}}</p>
 
     <b-modal :active.sync="isNewDealModalActive" has-modal-card>
           <new-deal-modal @close="close"></new-deal-modal>
@@ -67,7 +68,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+.page-frame{
+  width: 50%;
+  margin: 0 auto;
+  min-width: 500px;;
+}
+
+.intro-text{
+  width: 80%;
+  margin: 20px auto;
+  text-align: left;
+}
+
+.main-table{
+  margin: 0 auto;
+}
+
+.welcome{
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+h2 {
   font-weight: normal;
 }
 ul {
@@ -83,14 +105,15 @@ a {
 }
 
 img {
-  height: 50px;
+  height: 40px;
   vertical-align: middle;
 }
 
 th {
-  text-align: center;
+  text-align: left;
   border-bottom: 1px solid lightgray;
-  padding: 20px 0;
+  padding: 15px 0;
+  padding-left: 15px;
 }
 
 td {
@@ -98,8 +121,12 @@ td {
   text-align: left;
   vertical-align: top;
   border-bottom: 1px solid lightgray;
-  line-height: 60px;
-  padding: 0 20px;
+  padding: 20px 20px;
+}
+
+.cell1{
+    font-weight: bold;
+    width: 300px;
 }
 
 .right-border{
@@ -107,6 +134,29 @@ td {
 }
 
 tr:not(:first-child):hover {
-    background-color: lightgrey;
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+.new-deal{
+  background-color: #2986CE;
+  color: white;
+  font-weight: bold;
+  border: none;
+  font-size: 1em;
+  height: 2em;
+  border-radius: 4px;
+  margin-bottom: 40px;
+}
+
+.new-deal:hover {
+  background-color: #5290bf;
+  cursor: pointer;
+}
+
+.icon{
+  margin-left: 2px;
+  margin-right: 2px;
+  vertical-align: bottom;
 }
 </style>
