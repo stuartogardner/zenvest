@@ -21,7 +21,10 @@ const addDeal = function(dealInfo){
 }
 
 const updateDeal = function(updatedInfo, dealId){
-    return axios.patch('http://localhost:3000/api/deals/'+dealId)
+    console.log('made it to the fe api file')
+    console.log('info to update',updatedInfo)
+    console.log('deal id is', dealId)
+    return axios.patch('http://localhost:3000/api/deals/'+dealId, updatedInfo)
     .then(response => response.data)
 }
 

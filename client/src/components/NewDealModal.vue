@@ -3,8 +3,7 @@
         <section class="modal-card-body">
 
           <div class="field">
-           <form dealId === undefined ? @submit.prevent="addDeal" : @submit.prevent="updateDeal">
-
+            <form @submit.prevent="addDeal(); updateDeal()">
               <div class="field">
                 <label class="label">Company name
                     <input class="input" type="text" required v-model="companyName" placeholder="What is the name of the company?">
@@ -41,7 +40,9 @@
                 </label>
               </div>
 
-                <button class="button is-success" type="submit"  name="button" style="font-weight: bold">Add Deal</button>
+                <button v-if="dealId === undefined" class="button is-success" type="submit"  name="button" style="font-weight: bold">Add Deal</button>
+                <button v-else class="button is-success" type="submit"  name="button" style="font-weight: bold">Update Deal</button>
+
                 <p v-if="successMessage!==null">{{successMessage}}</p>
               </form>
               <br>
@@ -72,45 +73,56 @@ export default {
         console.log('this dollar route', this.$route.path);
         this.dealId = this.$route.params[0];
         console.log('this. dealID', this.dealId)
-        getDealById(this.dealId)
-        .then(deal => {
-            this.companyName = deal.companyName;
-            this.companyLogoUrl = deal.companyLogoUrl;
-            this.dealName = deal.dealName;
-            this.categoryName = deal.categoryName;
-            this.description = deal.description;
-        });
+        if(this.dealId!==undefined){
+            console.log('only triggers on the edit page')
+            getDealById(this.dealId)
+            .then(deal => {
+                this.companyName = deal.companyName;
+                this.companyLogoUrl = deal.companyLogoUrl;
+                this.dealName = deal.dealName;
+                this.categoryName = deal.categoryName;
+                this.description = deal.description;
+            });
+        }
     },
     methods:{
         addDeal(){
-            console.log('front end one');
-            addDeal({
-                companyName: this.companyName,
-                companyLogoUrl: this.companyLogoUrl, 
-                dealName: this.dealName,
-                categoryName: this.categoryName,
-                description: this.description})
-            .then(response => {
-                this.successMessage = `The deal, '${this.dealName}' , has been added successfully`;
-                setTimeout(()=> {
-                    this.$parent.close();
-                }, 2500);
-            })
+            if(this.dealId === undefined){
+                console.log('the wrong button was triggered')
+    
+                console.log('front end one');
+                addDeal({
+                    companyName: this.companyName,
+                    companyLogoUrl: this.companyLogoUrl, 
+                    dealName: this.dealName,
+                    categoryName: this.categoryName,
+                    description: this.description})
+                .then(response => {
+                    this.successMessage = `The deal, '${this.dealName}' , has been added successfully`;
+                    setTimeout(()=> {
+                        this.$parent.close();
+                    }, 2500);
+                })
+            }
         },
         updateDeal(){
-            updateDeal({
-                companyName: this.companyName,
-                companyLogoUrl: this.companyLogoUrl, 
-                dealName: this.dealName,
-                categoryName: this.categoryName,
-                description: this.description,
-            }, this.dealId)
-            .then(response => {
-                this.successMessage = `The deal, '${this.dealName}' , has been updated successfully`;
-                setTimeout(()=> {
-                    this.$parent.close();
-                }, 2500);
-            })
+            if(this.dealId!==undefined){
+                console.log('the right button was triggered')
+                updateDeal({
+                    companyName: this.companyName,
+                    companyLogoUrl: this.companyLogoUrl, 
+                    dealName: this.dealName,
+                    categoryName: this.categoryName,
+                    description: this.description,
+                }, this.dealId)
+                .then(response => {
+                    this.successMessage = `The deal, '${this.dealName}' , has been updated successfully`;
+                    console.log('the updated response is', response)
+                    setTimeout(()=> {
+                        this.$parent.close();
+                    }, 2500);
+                })
+            }
         },
     },
 

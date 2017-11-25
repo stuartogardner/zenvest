@@ -49,10 +49,28 @@ router.post('/deals', (req, res, next)=>{
       });
 })
 
-router.patch('/deal/:id', (req, res, next) => {
+router.patch('/deals/:id', (req, res, next) => {
     console.log('weve made it to the backend')
     console.log('params', req.params)
     console.log('body', req.body)
+
+    const dealId = req.params.id;
+    const {companyName, companyLogoUrl, dealName, categoryName, description} = req.body;
+    
+        const dealInfoToUpdate = {
+            companyName, 
+            companyLogoUrl, 
+            dealName, 
+            categoryName, 
+            description
+        };
+
+    Deal.findByIdAndUpdate(dealId, dealInfoToUpdate, { new: true})
+    .then(updatedDeal => {
+        console.log('the updated details are...', updatedDeal)
+        res.json(updatedDeal);
+    })
+    
 })
 
 module.exports = router;
