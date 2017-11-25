@@ -7,7 +7,7 @@
                 </div>
                 <div class="title-inner-div">
                     <h1>{{companyName}}</h1>
-                    <h2>{{dealName}}</h2>
+                    <h2 class="capitalise">{{dealName}}</h2>
                     <button class='update-deal' @click="editDeal">
                         <icon class="icon is-small is-left" name="pencil-square-o"></icon>
                         Update deal
@@ -52,11 +52,9 @@ export default {
         };
     },
     created(){
-        console.log('2',this.$route.params[0])
         this.dealId = this.$route.params[0];
         getDealById(this.dealId)
         .then(deal => {
-            console.log('the deal data is', deal);
             this.companyName = deal.companyName;
             this.companyLogoUrl = deal.companyLogoUrl;
             this.dealName = deal.dealName;
@@ -70,10 +68,8 @@ export default {
     watch: {
     isEditDealActive(){
       if(this.isEditDealActive === false){
-        console.log('it chnaged to false');
       getDealById(this.dealId)
       .then(deal => {
-            console.log('the deal data is', deal);
             this.companyName = deal.companyName;
             this.companyLogoUrl = deal.companyLogoUrl;
             this.dealName = deal.dealName;
@@ -95,7 +91,6 @@ export default {
             this.isEditDealActive =false;
         },
     },
-    // props: ["deal"],
 }
 </script>
 
@@ -163,5 +158,9 @@ h2{
   margin-left: 2px;
   margin-right: 2px;
   vertical-align: bottom;
+}
+
+.capitalise{
+    text-transform: capitalize;
 }
 </style>

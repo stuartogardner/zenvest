@@ -21,10 +21,6 @@
           <new-deal-modal @close="close"></new-deal-modal>
     </b-modal>
 
-    <!-- <b-modal :active.sync="isDetailsModalActive" has-modal-card>
-          <deal-details-modal :deal="deal" @close="close"></deal-details-modal>
-    </b-modal> -->
-
   </div>
 </template>
 
@@ -50,7 +46,6 @@ export default {
   watch: {
     isNewDealModalActive(){
       if(this.isNewDealModalActive === false){
-        console.log('it chnaged to false');
       getDeals()
       .then(response => this.deals = response);
       }
@@ -62,23 +57,18 @@ export default {
     },
     close(){
       this.isNewDealModalActive =false;
-      console.log('it closed')
       getDeals()
       .then(response => this.deals = response);
     },
     showDetails(deal){ 
-      console.log('ive been clicked');
-      console.log('the details i have are', deal._id);
       const dealId = deal._id;
       getDealById(dealId)
       .then(deal => this.$router.push("/deal/" + deal._id))
-      // this.deal = deal;
     }
   },
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .page-frame{
   width: 50%;
@@ -138,7 +128,8 @@ td {
 
 .cell1{
     font-weight: bold;
-    width: 300px;
+    width: 50%;
+    min-width: 250px;
 }
 
 .right-border{
@@ -159,6 +150,7 @@ tr:not(:first-child):hover {
   height: 2em;
   border-radius: 4px;
   margin-bottom: 40px;
+  width: 190px;
 }
 
 .new-deal:hover {

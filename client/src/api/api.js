@@ -6,29 +6,27 @@ const getDeals = function(){
 }
 
 const getDealById = function(id){
-    console.log('entering the api file on the FE')
-    console.log('the payload id is', id)
-
     return axios.get('http://localhost:3000/api/deals/'+id)
     .then(response => response.data)
 }
 
 const addDeal = function(dealInfo){
-    console.log('fe 2')
-    console.log(dealInfo)
     return axios.post('http://localhost:3000/api/deals', dealInfo)
     .then(response => response.data)
 }
 
 const updateDeal = function(updatedInfo, dealId){
-    console.log('made it to the fe api file')
-    console.log('info to update',updatedInfo)
-    console.log('deal id is', dealId)
     return axios.patch('http://localhost:3000/api/deals/'+dealId, updatedInfo)
+    .then(response => response.data)
+}
+
+const getInvestors = function(){
+    return axios.get('http://localhost:3000/api/investors')
     .then(response => response.data)
 }
 
 export {getDeals};
 export {addDeal};
 export {getDealById};
-export {updateDeal}
+export {updateDeal};
+export {getInvestors};

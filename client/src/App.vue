@@ -45,7 +45,6 @@ export default {
   },
   beforeUpdate: function() {
     this.path = this.$route.path;
-    console.log('the page is', this.page)
   },
 }
 </script>
