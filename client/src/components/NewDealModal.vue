@@ -3,7 +3,7 @@
         <section class="modal-card-body">
 
           <div class="field">
-           <form @submit.prevent="addDeal">
+           <form dealId === undefined ? @submit.prevent="addDeal" : @submit.prevent="updateDeal">
 
               <div class="field">
                 <label class="label">Company name
@@ -52,7 +52,10 @@
 </template>
 
 <script>
-import {addDeal} from '@/api/api'
+import {addDeal} from '@/api/api';
+import {getDealById} from '@/api/api';
+import {updateDeal} from '@/api/api';
+
 export default {
     data(){
         return{
@@ -62,7 +65,21 @@ export default {
             categoryName: '',
             description: '',
             successMessage: null,
+            dealId: null,
         };
+    },
+    created(){
+        console.log('this dollar route', this.$route.path);
+        this.dealId = this.$route.params[0];
+        console.log('this. dealID', this.dealId)
+        getDealById(this.dealId)
+        .then(deal => {
+            this.companyName = deal.companyName;
+            this.companyLogoUrl = deal.companyLogoUrl;
+            this.dealName = deal.dealName;
+            this.categoryName = deal.categoryName;
+            this.description = deal.description;
+        });
     },
     methods:{
         addDeal(){
@@ -77,9 +94,24 @@ export default {
                 this.successMessage = `The deal, '${this.dealName}' , has been added successfully`;
                 setTimeout(()=> {
                     this.$parent.close();
-                    }, 2500);
-                })
-        }
+                }, 2500);
+            })
+        },
+        updateDeal(){
+            updateDeal({
+                companyName: this.companyName,
+                companyLogoUrl: this.companyLogoUrl, 
+                dealName: this.dealName,
+                categoryName: this.categoryName,
+                description: this.description,
+            }, this.dealId)
+            .then(response => {
+                this.successMessage = `The deal, '${this.dealName}' , has been updated successfully`;
+                setTimeout(()=> {
+                    this.$parent.close();
+                }, 2500);
+            })
+        },
     },
 
 }

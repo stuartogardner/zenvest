@@ -6,10 +6,22 @@ router.get('/deals', (req, res, next) => {
     Deal.find()
     .then(deals => {
         console.log('were here with the deals info');
-        console.log(deals);
+        // console.log(deals);
         res.json(deals);
     })
 });
+
+router.get('/deals/:id', (req, res, next) => {
+    console.log('entering the backend')
+    console.log('the id is', req.params.id)
+    const id = req.params.id;
+    Deal.findById(id)
+    .then(deal => {
+        console.log('deal found')
+        console.log(deal)
+        res.json(deal);
+    })
+})
 
 router.post('/deals', (req, res, next)=>{
     console.log('were in the backend')
@@ -35,6 +47,12 @@ router.post('/deals', (req, res, next)=>{
           success: true
         });
       });
+})
+
+router.patch('/deal/:id', (req, res, next) => {
+    console.log('weve made it to the backend')
+    console.log('params', req.params)
+    console.log('body', req.body)
 })
 
 module.exports = router;

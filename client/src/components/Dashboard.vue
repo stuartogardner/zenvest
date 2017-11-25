@@ -7,7 +7,7 @@
         <th class='right-border'>Company</th>
         <th>Deal</th>
       </tr>
-      <tr v-for="deal in deals" @click="showDetailsModal(deal)"> 
+      <tr v-for="deal in deals" @click="showDetails(deal)"> 
         <td class='right-border'><img :src="deal.companyLogoUrl"> {{deal.companyName}}</td>
         <td>{{deal.dealName}}</td>
       </tr>
@@ -20,26 +20,26 @@
           <new-deal-modal @close="close"></new-deal-modal>
     </b-modal>
 
-    <b-modal :active.sync="isDetailsModalActive" has-modal-card>
+    <!-- <b-modal :active.sync="isDetailsModalActive" has-modal-card>
           <deal-details-modal :deal="deal" @close="close"></deal-details-modal>
-    </b-modal>
+    </b-modal> -->
 
   </div>
 </template>
 
 <script>
 import {getDeals} from '@/api/api';
+import {getDealById} from '@/api/api';
 import NewDealModal from '@/components/NewDealModal';
-import DealDetailsModal from '@/components/DealDetailsModal';
+import DealDetails from '@/components/DealDetails';
 
 export default {
-  components: {NewDealModal, DealDetailsModal},
+  components: {NewDealModal, DealDetails},
   data () {
     return {
       deal: null,
       deals: [],
       isNewDealModalActive: false,
-      isDetailsModalActive: false,
     }
   },
   created(){
@@ -53,10 +53,13 @@ export default {
     close(){
       this.isNewDealModalActive =false;
     },
-    showDetailsModal(deal){
+    showDetails(deal){ 
       console.log('ive been clicked');
-      this.isDetailsModalActive=true;
-      this.deal = deal;
+      console.log('the details i have are', deal._id);
+      const dealId = deal._id;
+      getDealById(dealId)
+      .then(deal => this.$router.push("/deal/" + deal._id))
+      // this.deal = deal;
     }
   },
 }
