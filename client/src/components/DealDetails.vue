@@ -1,24 +1,31 @@
 <template>
-  <div>
+  <div class="page-frame">
       <router-link to="/deals">Back to your deals</router-link>
         <section>
-            <div>
-                <img :src="companyLogoUrl">
-                <h2>Company Name: {{companyName}}</h2>
-                <h2>Deal Title: {{dealName}}</h2>
+            <div class='deal-title-div'>
+                <div>
+                    <img :src="companyLogoUrl">
+                </div>
+                <div class="title-inner-div">
+                    <h1>{{companyName}}</h1>
+                    <h2>{{dealName}}</h2>
+                <button class='update-deal' @click="editDeal">
+                    <icon class="icon is-small is-left" name="pencil-square-o"></icon>
+                    Update deal
+                </button>
+                </div>
             </div>
-            <div>
-                <h3>Deal Overview</h3>
+            <div class="description-div">
+                <h2>Deal Overview</h2>
                 <p>{{description}}</p>
             </div>
-            <div>
-                <h3>Investors In This Deal</h3>
+            <div class="investor-div">
+                <h2>Investors In This Deal</h2>
                 <ul v-for="investor in investors">
                     <li>{{investor}}</li>
                 </ul>
             </div>
         </section>
-        <button @click="editDeal">Edit this deal</button>
 
     <b-modal :active.sync="isEditDealActive" has-modal-card>
           <new-deal-modal @close="close"></new-deal-modal>
@@ -73,9 +80,64 @@ export default {
 </script>
 
 <style scoped>
+.page-frame{
+  width: 50%;
+  margin: 0 auto 60px;
+  min-width: 500px;
+  background-color: white;
+}
 
 img {
     height: 100px;
 }
 
+.deal-title-div{
+    display: flex;
+    flex-direction: row;
+}
+
+.title-inner-div{
+    text-align: left;
+    margin-left: 15px;
+}
+
+h1{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+h2{
+    font-weight: bold;
+}
+
+.description-div{
+    text-align: left;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.investor-div{
+    text-align: left;
+}
+
+.update-deal{
+  background-color: #2986CE;
+  color: white;
+  font-weight: bold;
+  border: none;
+  font-size: 1em;
+  height: 2em;
+  border-radius: 4px;
+}
+
+.update-deal:hover {
+  background-color: #5290bf;
+  cursor: pointer;
+}
+
+.icon{
+  margin-left: 2px;
+  margin-right: 2px;
+  vertical-align: bottom;
+}
 </style>

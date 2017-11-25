@@ -82,7 +82,7 @@ export default {
 <style scoped>
 .page-frame{
   width: 50%;
-  margin: 0 auto;
+  margin: 0 auto 60px;
   min-width: 500px;;
 }
 
